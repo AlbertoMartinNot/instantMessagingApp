@@ -3,16 +3,9 @@
     <div class="col-sm-12 col-md-12 col-lg-12">
       Your User: <span>{{ this.connectedUser }}</span>
     </div>
-    <div class="col-sm-4 col-md-4 col-lg-4">
+    <div class="col-sm-2 col-md-2 col-lg-2">
       <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12">
-          Connected Users List:
-          <ul class="list-group list-group-flush">
-            <li *ngFor="let user of usersList" class="list-group-item">
-              {{ user }}
-            </li>
-          </ul>
-        </div>
+        <app-user-list [userList]="usersList"></app-user-list>
       </div>
     </div>
     <div class="col-sm-6 col-md-6 col-lg-6">
@@ -25,8 +18,8 @@
               class="list-group-item"
               [ngClass]="
                 connectedUser === message.username
-                  ? 'list-group-item list-group-item-primary'
-                  : 'list-group-item list-group-item-success'
+                  ? 'list-group-item list-group-item-primary connected-user-message'
+                  : 'list-group-item list-group-item-success other-user-message'
               "
             >
               - {{ message.username }} said: {{ message.text }}
@@ -35,7 +28,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-12 col-md-12 col-lg-12">
+        <div class="col-sm-12 col-md-12 col-lg-12 message-writing-bar-spacer" >
           <div class="input-group">
             <input
               type="text"
@@ -47,11 +40,11 @@
               (keyup)="$event.keyCode == 13 && sendMessage()"
             />
             <div class="input-group-append">
-              <button class="btn btn-outline-primary" type="button" (click)="sendMessage()">
-                Send Message
+              <button class="btn btn-outline-primary" type="button" (click)="sendMessage()" [disabled]="!messageText">
+                <i class="fas fa-paper-plane"></i>
               </button>
-              <button class="btn btn-outline-danger" type="button" (click)="clearMessageList()">
-                Clear Messages
+              <button class="btn btn-outline-danger" type="button" (click)="clearMessageList()" [disabled]="!messageList[0]">
+                <i class="fas fa-trash-alt"></i>
               </button>
             </div>
           </div>

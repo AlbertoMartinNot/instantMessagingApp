@@ -1,0 +1,15 @@
+<button
+  class="btn btn-success"
+  type="button"
+  data-toggle="collapse"
+  data-target="#onlineUsers" 
+>
+  Online Users <i class="fas fa-caret-down"></i>
+</button>
+<div class="collapse" id="onlineUsers">
+  <ul class="list-group list-group-flush">
+    <li *ngFor="let user of userList" class="list-group-item">
+      {{ user }}
+    </li>
+  </ul>
+</div>
